@@ -25,7 +25,7 @@ var app = (function () {
                     app.loadData(response.d["__next"]);
                 } else {
                     // write the now complete acronym object to local cache?
-                    app.showNotification("Completed loading acronym data", "");
+                    app.showNotification("Completed loading " + Object.keys(app.acronyms).length + " acronyms", "");
                 }
             }
         });
