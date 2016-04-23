@@ -4,9 +4,10 @@ var app = (function () {
     "use strict";
 
     var app = {};
+    app.acronyms = {};
+    var ACRONYMS = 'acronyms';
 
     // get data from REST API to lookup acronyms
-    app.acronyms = {};
     app.loadData = function (url) {
         jQuery.ajax({
             url: url,
@@ -24,7 +25,7 @@ var app = (function () {
                 if (response && response.d && response.d["__next"]) {
                     app.loadData(response.d["__next"]);
                 } else {
-                    // write the now complete acronym object to local cache?
+                    window.sessionStorage.setItem(ACRONYMS, JSON.stringify(app.acronyms));
                     app.showNotification("Completed loading " + Object.keys(app.acronyms).length + " acronyms", "");
                 }
             }
@@ -34,7 +35,10 @@ var app = (function () {
     // Common initialization function (to be called from each page)
     app.initialize = function () {
         // begin loading acronym data
-        app.loadData("https://www.wecc.biz/_api/Web/Lists/getByTitle('Acronyms')/items?$select=Acronym,Title");
+        app.acronyms = window.sessionStorage.getItem(ACRONYMS);
+        if (!app.acronyms || !app.acronyms.length || app.acronyms.length < 1) {
+            app.loadData("https://www.wecc.biz/_api/Web/Lists/getByTitle('Acronyms')/items?$select=Acronym,Title");
+        }
 
         $('body').append(
             '<div id="notification-message">' +
