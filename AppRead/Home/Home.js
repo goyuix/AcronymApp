@@ -37,7 +37,7 @@
             for (var i=0;i<matches.length;i++) {
                 html.push('<li><b>'+matches[i]+'</b><br/>'+(app.acronyms[matches[i]] ? app.acronyms[matches[i]] : 'No matching definition'))+'</li>';
             }
-            $("#body").text('<ul>'+html.join(',')+'</ul>');
+            $("#body").html('<ul>'+html.join(',')+'</ul>');
         })
         
     }
