@@ -32,8 +32,12 @@
         }
 
         Office.context.mailbox.item.body.getAsync("text", {}, function (result) {
+            var html = [];
             var matches = $.unique(result.value.match(/\b[A-Z]{3,}\b/g));
-            $("#body").text(matches.join(','));
+            for (var i=0;i<matches.length;i++) {
+                html.push('<li><b>'+matches[i]+'</b><br/>'+(app.acronyms[acr] ? app.acronyms[acr] : 'No matching definition'))+'</li>';
+            }
+            $("#body").text('<ul>'+html.join(',')+'</ul>');
         })
         
     }
