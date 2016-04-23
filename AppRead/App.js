@@ -37,6 +37,7 @@ var app = (function () {
         // begin loading acronym data
         app.acronyms = window.sessionStorage.getItem(ACRONYMS);
         if (!app.acronyms || !app.acronyms.length || app.acronyms.length < 1) {
+            app.acronyms = {};
             app.loadData("https://www.wecc.biz/_api/Web/Lists/getByTitle('Acronyms')/items?$select=Acronym,Title");
         }
 
