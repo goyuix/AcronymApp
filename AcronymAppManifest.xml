@@ -23,11 +23,13 @@
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
+    <!--
     <Form xsi:type="ItemEdit">
       <DesktopSettings>
         <SourceLocation DefaultValue="https://goyuix.github.io/AcronymApp/AppCompose/Home/Home.html" />
       </DesktopSettings>
     </Form>
+    -->
   </FormSettings>
   <Permissions>ReadWriteItem</Permissions>
   <Rule xsi:type="RuleCollection" Mode="Or">
