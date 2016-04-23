@@ -35,7 +35,7 @@
             var html = [];
             var matches = $.unique(result.value.match(/\b[A-Z]{3,}\b/g));
             for (var i=0;i<matches.length;i++) {
-                html.push('<li><b>'+matches[i]+'</b><br/>'+(app.acronyms[acr] ? app.acronyms[acr] : 'No matching definition'))+'</li>';
+                html.push('<li><b>'+matches[i]+'</b><br/>'+(app.acronyms[matches[i]] ? app.acronyms[matches[i]] : 'No matching definition'))+'</li>';
             }
             $("#body").text('<ul>'+html.join(',')+'</ul>');
         })
