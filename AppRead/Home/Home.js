@@ -14,6 +14,7 @@
     
     // render function to display the acronyms
     function displayAcronyms(matches) {
+        var html = [];
         // check for acronyms to be loaded, if not return back to this function in 500ms
         if (Object.keys(app.acronyms).length < 1) {
             setTimeout(function(){displayAcronyms(matches)},500);
@@ -50,7 +51,6 @@
         }
 
         Office.context.mailbox.item.body.getAsync("text", {}, function (result) {
-            var html = [];
             var matches = result.value.match(/\b[A-Z]{3,}\b/g);
             displayAcronyms(matches!=null?$.unique(matches):[]);
         });
