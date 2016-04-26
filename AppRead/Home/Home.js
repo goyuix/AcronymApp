@@ -51,8 +51,8 @@
 
         Office.context.mailbox.item.body.getAsync("text", {}, function (result) {
             var html = [];
-            var matches = $.unique(result.value.match(/\b[A-Z]{3,}\b/g));
-            displayAcronyms(matches);
+            var matches = result.value.match(/\b[A-Z]{3,}\b/g);
+            displayAcronyms(matches!=null?$.unique(matches):[]);
         });
         
     }
