@@ -61,7 +61,7 @@
 
         Office.context.mailbox.item.body.getAsync("text", {}, function (result) {
             var matches = result.value.match(/\b[A-Z]{3,}\b/g);
-            displayAcronyms(matches!=null?$.unique(matches):[]);
+            displayAcronyms(matches!=null?matches.filter(function(item,i,a){return i==a.indexOf(item);}).sort():[]);
         });
         
     }
