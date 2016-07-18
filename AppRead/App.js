@@ -18,7 +18,6 @@ var app = (function () {
                 if (response && response.d && response.d.results) {
                     for (var i = 0; i < response.d.results.length; i++) {
                         item = response.d.results[i];
-                        app.acronyms[item.Acronym] = item.Title;
                         if (!app.acronyms[item.Acronym]) {
                             app.acronyms[item.Acronym] = [];
                         }
