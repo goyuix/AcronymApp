@@ -2,6 +2,7 @@
 
 (function () {
     "use strict";
+    var ACRONYMS = 'acronyms';
 
     // The Office initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
@@ -16,19 +17,27 @@
     function displayAcronyms(matches) {
         var html = [];
         // check for acronyms to be loaded, if not return back to this function in 500ms
-        if (Object.keys(app.acronyms).length < 1) {
+        if (!window.sessionStorage.getItem(ACRONYMS)) {
             setTimeout(function(){displayAcronyms(matches)},500);
         }
         
         if (matches && matches.length) {
-                for (var i=0;i<matches.length;i++) {
-                    html.push('<li><b>'+matches[i]+'</b><br/>'+(app.acronyms[matches[i]] ? app.acronyms[matches[i]] : 'No matching definition'))+'</li>';
+            for (var i=0;i<matches.length;i++) {
+                html.push('<li><b>'+matches[i]+'</b><br/>');
+                if (app.acronyms[matches[i]]) {
+                    for (var j=0;j<app.acronyms[matches[i]].length;j++) {
+                        html.push(app.acronyms[matches[i]][j] + '<br/>');
+                    }
+                } else {
+                    html.push('No matching definition');
                 }
-                $("#body").html('<ul>'+html.join(',')+'</ul>');
-            } else {
-                $("#body").text('No acronyms found in this message');
-                app.showNotification('Notice - No acronyms found','Sorry, no acronyms were found in the body of this message');
+                html.push('</li>');
             }
+            $("#body").html('<ul>'+html.join(',')+'</ul>');
+        } else {
+            $("#body").text('No acronyms found in this message');
+            app.showNotification('Notice - No acronyms found','Sorry, no acronyms were found in the body of this message');
+        }
     }
 
     // Displays the "Subject" and "From" fields, based on the current mail item

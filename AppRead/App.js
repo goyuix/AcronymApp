@@ -19,6 +19,10 @@ var app = (function () {
                     for (var i = 0; i < response.d.results.length; i++) {
                         item = response.d.results[i];
                         app.acronyms[item.Acronym] = item.Title;
+                        if (!app.acronyms[item.Acronym]) {
+                            app.acronyms[item.Acronym] = [];
+                        }
+                        app.acronyms[item.Acronym].push(item.Title);
                     }
                 }
                 // if there is more paged data, start request for it
