@@ -29,7 +29,7 @@
                         html.push('<br/>' + app.acronyms[matches[i]][j]);
                     }
                 } else {
-                    html.push('No matching definition');
+                    html.push(' - No matching definition');
                 }
                 html.push('</li>');
             }
