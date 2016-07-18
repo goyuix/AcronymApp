@@ -22,17 +22,17 @@
         }
         
         if (matches && matches.length) {
-            for (var i=0;i<matches.length;i++) {
-                html.push('<li><b>'+matches[i]+'</b>');
-                if (app.acronyms[matches[i]]) {
-                    for (var j=0;j<app.acronyms[matches[i]].length;j++) {
-                        html.push('<br/>' + app.acronyms[matches[i]][j]);
-                    }
+            $.each(matches, function(i,match){
+                html.push('<li><b>'+match+'</b>');
+                if (app.acronyms[match]) {
+                    $.each(app.acronyms[match], function(i,definition){
+                        html.push('<br/>' + definition);
+                    });
                 } else {
                     html.push(' - No matching definition');
                 }
                 html.push('</li>');
-            }
+            });
             $("#body").html('<ul>'+html.join('')+'</ul>');
         } else {
             $("#body").text('No acronyms found in this message');
